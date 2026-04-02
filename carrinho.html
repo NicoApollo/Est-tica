@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Carrinho | Clínica Estética</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .cart-container { padding: 60px 5%; min-height: 80vh; max-width: 1000px; margin: 0 auto; }
+        .cart-item { 
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px; border-bottom: 1px solid var(--light-pink); background: white;
+            border-radius: 15px; margin-bottom: 15px;
+        }
+        .cart-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 10px; }
+        .cart-item-info { flex: 1; padding: 0 20px; }
+        .cart-item-info h4 { color: var(--black-matte); margin-bottom: 5px; }
+        .cart-item-price { font-weight: 800; color: var(--primary-pink); }
+        .remove-btn { background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 1.2rem; }
+        
+        .cart-summary { 
+            margin-top: 40px; padding: 30px; background: var(--light-pink); 
+            border-radius: 25px; text-align: right;
+        }
+        .total-price { font-size: 2rem; font-weight: 800; color: var(--black-matte); display: block; margin: 10px 0; }
+        .btn-checkout { 
+            background: var(--primary-pink); color: white; padding: 20px 50px; 
+            border-radius: 15px; text-decoration: none; font-weight: 800; display: inline-block;
+            transition: 0.3s;
+        }
+        .btn-checkout:hover { background: var(--black-matte); transform: translateY(-3px); }
+        .empty-msg { text-align: center; padding: 50px; font-size: 1.2rem; color: var(--text-dark); }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="brand"><h1>Elemental Code Skin</h1></div>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-item">LOJA</a>
+            <a href="carrinho.html" class="nav-item active icon-only"><i class="fa-solid fa-bag-shopping"></i></a>
+        </nav>
+    </header>
+
+    <main class="cart-container">
+        <div class="badge-autoridade">REVISÃO DE PEDIDO</div>
+        <h2 class="product-title">Seu Carrinho</h2>
+
+        <div id="cart-items-list">
+            </div>
+
+        <div class="cart-summary" id="cart-summary" style="display: none;">
+            <span>Total do Investimento:</span>
+            <span class="total-price" id="total-val">R$ 0,00</span>
+            <a href="#" class="btn-checkout">FINALIZAR COMPRA</a>
+        </div>
+    </main>
+
+    <footer class="footer-elite">
+        <div class="footer-bottom-content">
+            <p>&copy; 2026 Clínica Estética. Desenvolvido por Apollo.</p>
+            <div class="apollo-signature"><img src="img/logo-apollo.png" alt="Apollo" style="height: 75px;"></div>
+        </div>
+    </footer>
+
+    <script>
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('clinicaCart')) || [];
+            const list = document.getElementById('cart-items-list');
+            const summary = document.getElementById('cart-summary');
+            const totalDisplay = document.getElementById('total-val');
+            
+            if (cart.length === 0) {
+                list.innerHTML = '<div class="empty-msg">Seu carrinho está vazio. <br><br> <a href="loja.html" style="color: var(--primary-pink)">Voltar para a loja</a></div>';
+                summary.style.display = 'none';
+                return;
+            }
+
+            summary.style.display = 'block';
+            list.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <span class="cart-item-price">R$ ${item.price.toFixed(2)}</span>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(${index})"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+            totalDisplay.textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('clinicaCart'));
+            cart.splice(index, 1);
+            localStorage.setItem('clinicaCart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        renderCart();
+    </script>
+</body>
+</html>

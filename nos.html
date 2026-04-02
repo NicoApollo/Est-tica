@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Equipe | Clínica Estética 10 Anos</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================= ESTILOS ESPECÍFICOS: QUEM SOMOS ================= */
+        .team-page-container {
+            padding: 80px 5%;
+            background-color: var(--white);
+            min-height: 80vh;
+        }
+
+        .team-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .team-intro h2 {
+            font-size: 3rem;
+            color: var(--black-matte);
+            margin-bottom: 20px;
+        }
+
+        /* GRID DE PROFISSIONAIS */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 20px;
+        }
+
+        /* O CÍRCULO COM FOTO */
+        .member-photo-wrapper {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            padding: 8px;
+            border: 2px solid var(--light-pink);
+            position: relative;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .member-photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: grayscale(100%); /* Estilo editorial chic */
+            transition: 0.5s ease;
+        }
+
+        .team-card:hover .member-photo-wrapper {
+            border-color: var(--primary-pink);
+            transform: scale(1.05);
+        }
+
+        .team-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .member-info h4 {
+            font-size: 1.4rem;
+            color: var(--black-matte);
+            margin-bottom: 5px;
+        }
+
+        .member-info span {
+            color: var(--primary-pink);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+        }
+
+        /* ================= MODAL DE APRESENTAÇÃO ================= */
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(74, 43, 53, 0.98);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 30px;
+            padding: 50px;
+            display: flex;
+            gap: 40px;
+            position: relative;
+            animation: modalSlideUp 0.4s ease;
+        }
+
+        @keyframes modalSlideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-left img {
+            width: 250px;
+            height: 250px;
+            border-radius: 30px;
+            object-fit: cover;
+        }
+
+        .modal-right {
+            flex: 1;
+        }
+
+        .modal-right h3 {
+            font-size: 2.2rem;
+            color: var(--black-matte);
+            margin-bottom: 10px;
+        }
+
+        .modal-right .specialty {
+            display: inline-block;
+            background: var(--light-pink);
+            color: var(--primary-pink);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-right p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .close-profile {
+            position: absolute;
+            top: 25px; right: 25px;
+            font-size: 2rem;
+            background: none; border: none;
+            cursor: pointer; color: var(--text-dark);
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .profile-modal-content {
+                flex-direction: column;
+                padding: 30px;
+                text-align: center;
+            }
+            .modal-left img { width: 150px; height: 150px; margin: 0 auto; }
+            .modal-right h3 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="brand">
+            <h1>Elemental Code Skin</h1>
+            <span>SKINCARE & PERFORMANCE</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-item">PERFIL</a>
+            <a href="videos.html" class="nav-item">VÍDEOS</a>
+            <a href="cursos.html" class="nav-item">CURSOS</a>
+            <a href="nos.html" class="nav-item active">NOS</a>
+            <button class="nav-item icon-only"><i class="fa-solid fa-bag-shopping"></i></button>
+        </nav>
+    </header>
+
+    <main class="team-page-container">
+        <div class="team-intro">
+            <div class="badge-autoridade">PROFISSIONAIS DE ELITE</div>
+            <h2>Os Rostos por trás da Excelência</h2>
+            <p>Conheça os especialistas que dedicam sua carreira à saúde e beleza da sua pele.</p>
+        </div>
+
+        <div class="team-grid">
+        <div class="team-card" 
+                 data-name="Rosalina" 
+                 data-role="Esteticista & Cosmetóloga"
+                 data-bio=""
+                 data-img="./img/Rosalina.jpeg">
+                <div class="member-photo-wrapper">
+                    <img src="./img/Rosalina.jpeg" alt="Profissional">
+                </div>
+                <div class="member-info">
+                    <h4>Rosalina</h4>
+                    <span>Esteticista & Cosmetóloga</span>
+                </div>
+            </div>
+
+            <div class="team-card" 
+                 data-name="Natiele" 
+                 data-role="Esteticista & Cosmetóloga"
+                 data-bio=""
+                 data-img="./img/Natiele.jpeg">
+                <div class="member-photo-wrapper">
+                    <img src="./img/Natiele.jpeg" alt="Profissional">
+                </div>
+                <div class="member-info">
+                    <h4>Natiele</h4>
+                    <span>Esteticista & Cosmetóloga</span>
+                </div>
+            </div>
+
+            <div class="team-card" 
+                 data-name="Rosimeire" 
+                 data-role="Esteticista & Cosmetóloga"
+                 data-bio=""
+                 data-img="./img/Rosimeire.jpeg">
+                <div class="member-photo-wrapper">
+                    <img src="./img/Rosimeire.jpeg" alt="Profissional">
+                </div>
+                <div class="member-info">
+                    <h4>Rosimeire</h4>
+                    <span>Esteticista & Cosmetóloga</span>
+                </div>
+            </div>
+
+            <div class="team-card" 
+                 data-name="Stella" 
+                 data-role="Esteticista & Cosmetóloga"
+                 data-bio=""
+                 data-img="./img/Stella.jpeg">
+                <div class="member-photo-wrapper">
+                    <img src="./img/Stella.jpeg" alt="Profissional">
+                </div>
+                <div class="member-info">
+                    <h4>Stella</h4>
+                    <span>Esteticista & Cosmetóloga</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="profileModal" class="profile-modal">
+        <div class="profile-modal-content">
+            <button class="close-profile" id="closeProfileBtn">&times;</button>
+            <div class="modal-left">
+                <img src="" id="modalMemberImg" alt="">
+            </div>
+            <div class="modal-right">
+                <h3 id="modalMemberName"></h3>
+                <span class="specialty" id="modalMemberRole"></span>
+                <p id="modalMemberBio"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-elite">
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2026 Clínica Estética. Orgulhosamente desenvolvido por Apollo.</p>
+                <div class="apollo-signature">
+                    <span>Powered by</span>
+                    <img src="./LogoBranco.png" alt="Apollo Tecnologia" style="height: 75px;">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const profileModal = document.getElementById('profileModal');
+        const teamCards = document.querySelectorAll('.team-card');
+        const closeProfileBtn = document.getElementById('closeProfileBtn');
+
+        teamCards.forEach(card => {
+            card.addEventListener('click', () => {
+                document.getElementById('modalMemberName').textContent = card.getAttribute('data-name');
+                document.getElementById('modalMemberRole').textContent = card.getAttribute('data-role');
+                document.getElementById('modalMemberBio').textContent = card.getAttribute('data-bio');
+                document.getElementById('modalMemberImg').src = card.getAttribute('data-img');
+                
+                profileModal.style.display = 'flex';
+            });
+        });
+
+        const closeProfile = () => {
+            profileModal.style.display = 'none';
+        };
+
+        closeProfileBtn.addEventListener('click', closeProfile);
+
+        window.addEventListener('click', (e) => {
+            if (e.target === profileModal) closeProfile();
+        });
+    </script>
+</body>
+</html>

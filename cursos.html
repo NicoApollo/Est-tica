@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos e Especializações | Clínica Estética</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================= ESTILOS ESPECÍFICOS: CURSOS ================= */
+        .courses-container {
+            padding: 80px 5%;
+            background-color: var(--white);
+            min-height: 80vh;
+        }
+
+        .courses-intro {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 80px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* CARD DE CURSO ESTILO PREMIUM */
+        .course-card {
+            background: var(--white);
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid var(--light-pink);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary-pink);
+            box-shadow: 0 25px 50px rgba(110, 53, 73, 0.15);
+        }
+
+        .course-banner {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .course-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+
+        .course-card:hover .course-banner img {
+            transform: scale(1.1);
+        }
+
+        .course-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-pink);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .course-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-content h3 {
+            font-size: 1.5rem;
+            color: var(--black-matte);
+            margin-bottom: 15px;
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .course-features li {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .course-features i {
+            color: var(--primary-pink);
+            font-size: 0.8rem;
+        }
+
+        .course-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-pink);
+        }
+
+        .course-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--black-matte);
+        }
+
+        .btn-details {
+            background: var(--light-pink);
+            color: var(--primary-pink);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .course-card:hover .btn-details {
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        /* MODAL DE CURSO */
+        .course-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(74, 43, 53, 0.98);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-body {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-body h2 { color: var(--black-matte); margin-bottom: 20px; }
+        .modal-body p { margin-bottom: 30px; line-height: 1.8; color: var(--text-dark); }
+
+        .close-btn {
+            position: absolute; top: 20px; right: 25px;
+            font-size: 2rem; background: none; border: none; cursor: pointer;
+        }
+
+        .btn-confirm {
+            background: var(--primary-pink);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 15px;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="brand">
+            <h1>Elemental Code Skin</h1>
+            <span>SKINCARE & PERFORMANCE</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-item">PERFIL</a>
+            <a href="cursos.html" class="nav-item active">CURSOS</a>
+            <a href="loja.html" class="nav-item">LOJA</a>
+            <a href="videos.html" class="nav-item">VÍDEOS</a>
+            <a href="nos.html" class="nav-item">NOS</a>
+            <a href="#" class="nav-item icon-only"><i class="fa-solid fa-bag-shopping"></i></a>
+        </nav>
+    </header>
+
+    <main class="courses-container">
+        <div class="courses-intro">
+            <div class="badge-autoridade">ACADEMIA DE ESTÉTICA</div>
+            <h2 class="product-title">Especialize-se com <br> os melhores do mercado</h2>
+            <p>Nossos 10 anos de experiência transformados em módulos práticos para profissionais que buscam resultados de alto impacto.</p>
+        </div>
+
+        <div class="courses-grid">
+            <div class="course-card" data-title="Masterclass Vitamina C" data-desc="Aprenda a ciência por trás da iluminação facial e os protocolos exclusivos de aplicação clínica para resultados imediatos.">
+                <div class="course-banner">
+                    <span class="course-tag">Online</span>
+                    <img src="./img/WhatsApp Image 2026-04-02 at 00.50.06.jpeg" alt="Curso">
+                </div>
+                <div class="course-content">
+                    <h3>Masterclass Vitamina C</h3>
+                    <ul class="course-features">
+                        <li><i class="fa-solid fa-check"></i> Certificado Reconhecido</li>
+                        <li><i class="fa-solid fa-check"></i> 12 Módulos Práticos</li>
+                        <li><i class="fa-solid fa-check"></i> Material de Apoio</li>
+                    </ul>
+                    <div class="course-footer">
+                        <div class="course-price">R$ 497,00</div>
+                        <span class="btn-details">Ver Detalhes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-card" data-title="Performance de Pele" data-desc="Um curso avançado sobre diagnósticos precisos e montagem de cronogramas de Home Care personalizados para seus clientes.">
+                <div class="course-banner">
+                    <span class="course-tag">Presencial</span>
+                    <img src="./img/WhatsApp Image 2026-04-01 at 23.30.29.jpeg" alt="Curso">
+                </div>
+                <div class="course-content">
+                    <h3>Performance de Pele</h3>
+                    <ul class="course-features">
+                        <li><i class="fa-solid fa-check"></i> Prática em Modelo Real</li>
+                        <li><i class="fa-solid fa-check"></i> Diagnóstico por Imagem</li>
+                        <li><i class="fa-solid fa-check"></i> Coffee Break Premium</li>
+                    </ul>
+                    <div class="course-footer">
+                        <div class="course-price">R$ 1.200,00</div>
+                        <span class="btn-details">Ver Detalhes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="courseModal" class="course-modal">
+        <div class="modal-body">
+            <button class="close-btn" id="closeCourse">&times;</button>
+            <h2 id="modalTitle">Título do Curso</h2>
+            <p id="modalDesc">Descrição detalhada do curso aqui.</p>
+            <a href="#" class="btn-confirm">Quero Me Inscrever</a>
+        </div>
+    </div>
+
+    <footer class="footer-elite">
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2026 Clínica Estética. Orgulhosamente desenvolvido por Apollo.</p>
+                <div class="apollo-signature">
+                    <span>Powered by</span>
+                    <img src="./LogoBranco.png" alt="Apollo Tecnologia" style="height: 75px;">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('courseModal');
+        const cards = document.querySelectorAll('.course-card');
+        const closeBtn = document.getElementById('closeCourse');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                document.getElementById('modalTitle').textContent = card.getAttribute('data-title');
+                document.getElementById('modalDesc').textContent = card.getAttribute('data-desc');
+                modal.style.display = 'flex';
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.onclick = (e) => {
+            if (e.target == modal) modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
